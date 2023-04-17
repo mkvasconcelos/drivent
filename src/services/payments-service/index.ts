@@ -26,6 +26,7 @@ async function postPayment(userId: number, ticketId: number, cardIssuer: string,
   }
   const value = await ticketRepository.findTicketTypePrice(ticketId, userId);
   const res = await paymentRepository.create(ticketId, cardIssuer, number, value);
+  await ticketRepository.update(ticketId);
   return res;
 }
 

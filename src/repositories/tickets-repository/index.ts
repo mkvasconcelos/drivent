@@ -51,6 +51,18 @@ async function update(ticketId: number): Promise<Ticket> {
 
 async function findTicketTypePrice(ticketId: number, userId: number): Promise<number> {
   try {
+    console.log(
+      await prisma.ticket.findFirst({
+        where: {
+          id: 100,
+          // Enrollment: { userId },
+        },
+        include: {
+          TicketType: true,
+        },
+      }),
+    );
+    console.log(userId);
     const res = await prisma.ticket.findFirst({
       where: {
         id: ticketId,
@@ -60,6 +72,7 @@ async function findTicketTypePrice(ticketId: number, userId: number): Promise<nu
         TicketType: true,
       },
     });
+
     return res.TicketType.price;
   } catch {
     throw invalidDataError(['user not have ticket']);
