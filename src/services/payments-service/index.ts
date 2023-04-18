@@ -6,7 +6,9 @@ async function getTicketStatus(ticketId: number, userId: number) {
   if (!ticketId) {
     throw requestError(400, 'ticketId not valid');
   }
+  console.log(ticketId);
   const res = await paymentRepository.findPaymentByTicketId(ticketId);
+  console.log(res);
   if (!res) {
     throw notFoundError();
   } else {

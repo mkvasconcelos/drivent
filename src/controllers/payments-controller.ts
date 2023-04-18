@@ -13,9 +13,9 @@ export async function getTicketStatus(req: AuthenticatedRequest, res: Response) 
     if (error.name === 'RequestError') {
       return res.status(httpStatus.BAD_REQUEST).send(error.statusText);
     } else if (error.name === 'NotFoundError') {
-      return res.status(httpStatus.UNAUTHORIZED).send(['ticket not found']);
+      return res.status(httpStatus.NOT_FOUND).send(['ticket not found']);
     } else if (error.name === 'InvalidDataError') {
-      return res.status(httpStatus.NOT_FOUND).send(error.details);
+      return res.status(httpStatus.UNAUTHORIZED).send(error.details);
     }
   }
 }

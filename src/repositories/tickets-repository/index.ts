@@ -51,18 +51,6 @@ async function update(ticketId: number): Promise<Ticket> {
 
 async function findTicketTypePrice(ticketId: number, userId: number): Promise<number> {
   try {
-    console.log(
-      await prisma.ticket.findFirst({
-        where: {
-          id: 100,
-          // Enrollment: { userId },
-        },
-        include: {
-          TicketType: true,
-        },
-      }),
-    );
-    console.log(userId);
     const res = await prisma.ticket.findFirst({
       where: {
         id: ticketId,
